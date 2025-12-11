@@ -1,0 +1,144 @@
+/* src/pages/FavoritesPage/FavoritesPage.css */
+
+.favorites-page {
+  width: 100%;
+  min-height: calc(100vh - 64px);
+  padding: 24px 32px 40px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.favorites-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  /* НИКАКИХ border-top/bottom, чтобы не было линии */
+}
+
+.favorites-header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.back-link {
+  text-decoration: none;
+  color: #38bdf8;
+  font-size: 14px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid #1f2937;
+  background-color: rgba(15, 23, 42, 0.9);
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.back-link:hover {
+  background-color: rgba(30, 64, 175, 0.85);
+  transform: translateY(-1px);
+}
+
+.info-text {
+  color: #cbd5f5;
+  font-size: 14px;
+}
+
+/* сетка карточек без линий, на всю ширину */
+
+.characters-grid {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  justify-content: flex-start;
+}
+.favorites-page {
+  width: 100%;
+  min-height: calc(100vh - 64px);
+  padding: 24px 32px 40px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: transparent; /* важно: НЕТ своего градиента */
+}
+
+.favorites-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.favorites-header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.back-link {
+  text-decoration: none;
+  color: #38bdf8;
+  font-size: 14px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid #1f2937;
+  background-color: rgba(15, 23, 42, 0.9);
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.back-link:hover {
+  background-color: rgba(30, 64, 175, 0.85);
+  transform: translateY(-1px);
+}
+
+.info-text {
+  color: #cbd5f5;
+  font-size: 14px;
+}
+
+.characters-grid {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  justify-content: flex-start;
+}
+.favorites-auth-hint {
+  margin-top: 12px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background-color: rgba(15, 23, 42, 0.85);
+  border: 1px solid #1f2937;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.favorites-auth-hint p {
+  margin: 0;
+}
+.merge-banner {
+  margin: 12px 0 18px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background-color: rgba(22, 163, 74, 0.1);
+  border: 1px solid rgba(22, 163, 74, 0.4);
+  font-size: 13px;
+  color: #bbf7d0;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.merge-btn {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #16a34a;
+  background-color: #022c22;
+  color: #bbf7d0;
+  font-size: 12px;
+  cursor: pointer;
+}

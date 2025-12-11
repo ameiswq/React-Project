@@ -1,0 +1,218 @@
+/* src/components/NavBar/navBar.css */
+
+/* --------------------------------------------------
+   NAVBAR: тёмная шапка, немного светлее, чем фон,
+   без градиентов, с тенью и увеличенной высотой
+   -------------------------------------------------- */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 70px;                    /* стала чуть выше */
+  z-index: 50;
+
+  background-color: #050816;       /* однотонный фон шапки */
+  border-bottom: 1px solid #111827;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.7); /* мягкая тень, чтобы выделялась */
+}
+
+.navbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  box-sizing: border-box;
+}
+
+/* Лого */
+
+.navbar-logo {
+  font-weight: 600;
+  font-size: 20px;
+  text-decoration: none;
+  color: #f9fafb;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-accent {
+  padding: 5px 9px;
+  border-radius: 999px;
+  background-color: #2563eb;   /* аккуратный синий */
+  color: #f9fafb;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Навигация по страницам */
+
+.navbar-links {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.nav-link {
+  font-size: 15px;
+  color: #cbd5f5;
+  text-decoration: none;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.08s ease;
+}
+
+.nav-link:hover {
+  background-color: #0f172a;
+  border-color: #1f2937;
+  transform: translateY(-1px);
+}
+
+.nav-link--active {
+  color: #f9fafb;
+  background-color: #2563eb;
+  border-color: #2563eb;
+}
+
+/* Правая часть: почта + кнопки */
+
+.navbar-auth {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.navbar-user-email {
+  font-size: 13px;
+  color: #9ca3af;
+  max-width: 190px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Pills (Profile / Sign up) */
+
+.nav-link--pill {
+  padding-inline: 13px;
+  border-radius: 999px;
+  border-color: #4b5563;
+}
+
+.nav-link--pill:hover {
+  background-color: #0f172a;
+  border-color: #6b7280;
+}
+
+.nav-link--active-pill {
+  background-color: #020617;
+  border-color: #4b5563;
+  color: #f9fafb;
+}
+
+/* Log out — спокойная тёмная кнопка */
+
+.navbar-logout-btn {
+  border: 1px solid #4b5563;
+  outline: none;
+  cursor: pointer;
+  padding: 7px 13px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  background-color: #111827;
+  color: #e5e7eb;
+  box-shadow: none;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.08s ease;
+}
+
+.navbar-logout-btn:hover {
+  background-color: #020617;
+  border-color: #6b7280;
+  transform: translateY(-1px);
+}
+
+/* Мобильная версия */
+
+@media (max-width: 640px) {
+  .navbar-inner {
+    padding: 0 14px;
+    gap: 10px;
+  }
+
+  .navbar-links {
+    display: none;
+  }
+
+  .navbar-user-email {
+    max-width: 120px;
+  }
+}
+.navbar-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid #4b5563;
+  background-color: #111827;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #e5e7eb;
+}
+
+.navbar-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* чтобы "пилюля" вокруг аватара не добавляла лишние отступы */
+.nav-link--avatar {
+  padding: 0;
+  border-color: transparent;
+  background: transparent;
+}
+/* Баннер "вы оффлайн" над навбаром */
+.navbar-offline {
+  width: 100%;
+  padding: 6px 12px;
+  text-align: center;
+  font-size: 13px;
+  background-color: rgba(239, 68, 68, 0.18);
+  color: #fecaca;
+  border-bottom: 1px solid rgba(248, 113, 113, 0.7);
+}
+.navbar-offline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background-color: rgba(200,50,50,0.96);
+  padding:8px 12px;
+  color: #fff;
+  text-align:center;
+}
+
+/* сдвигаем содержимое страницы вниз, чтобы не лежало под баннером */
+body, .app-root {
+  padding-top: 42px; /* подгоняй по высоте баннера */
+}

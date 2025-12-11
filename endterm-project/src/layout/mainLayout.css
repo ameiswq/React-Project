@@ -1,0 +1,13 @@
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* единственный общий фон */
+  background:  #020617 ;
+  color: #e5e7eb;
+}
+
+.app-main {
+  flex: 1;
+  padding-top: 64px; /* под navbar */
+}

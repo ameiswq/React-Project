@@ -1,0 +1,82 @@
+.character-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+}
+
+.character-card {
+  position: relative; /* чтобы сердечко позиционировалось поверх */
+  width: 250px;
+  background:  #020617 ;
+  border-radius: 16px;
+  padding: 10px;
+  border: 1px solid #1f2937;
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.9);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    border-color 0.12s ease;
+}
+
+.character-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 1);
+  border-color: #38bdf8;
+}
+
+/* сердечко */
+.favorite-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 6px;
+  border-radius: 999px;
+  border: 1px solid #1f2937;
+  background-color: rgba(15, 23, 42, 0.9);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s ease, box-shadow 0.15s ease,
+    border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.favorite-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(15, 23, 42, 0.8);
+  border-color: #fb7185;
+  background-color: rgba(30, 64, 175, 0.8);
+}
+
+.favorite-btn--active {
+  border-color: #fb7185;
+  background-color: rgba(127, 29, 29, 0.9);
+}
+
+.heart-icon {
+  pointer-events: none;
+}
+
+/* остальное как было */
+.character-card img {
+  width: 100%;
+  height: 230px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 6px;
+}
+
+.character-card h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.character-card p {
+  margin: 0;
+  font-size: 13px;
+  color: #cbd5f5;
+}
