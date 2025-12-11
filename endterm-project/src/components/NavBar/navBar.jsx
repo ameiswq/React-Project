@@ -5,7 +5,7 @@ import "./navBar.css";
 
 export default function Navbar() {
   const { user, logout, avatar } = useAuth();
-  const isOffline = useOfflineStatus({ pingUrl: "/", interval: 0 });
+  const isOffline = useOfflineStatus();
   const initial = user && user.email ? user.email[0].toUpperCase() : "";
 
   async function handleLogout() {
