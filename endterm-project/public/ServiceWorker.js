@@ -5,40 +5,27 @@ const APP_SHELL_URLS = [
   "/",
   "/index.html",
   "/manifest.json",
-  "/icon-192x192.png",
-  "/icon-512x512.png",
   "/assets/index-CMs2n_GL.js",
   "/assets/index-DPRU6SAp.css"
 ];
 
 self.addEventListener("install", (event) => {
-  console.log("[SW] install");
+  console.log("[SW] Install");
   event.waitUntil(
-    caches.open(APP_SHELL_CACHE).then(async (cache) => {
-      try {
-        await cache.addAll(APP_SHELL_URLS);
-        console.log("[SW] App shell cached");
-      } catch (err) {
-        console.warn("[SW] Some resources failed to cache during install:", err);
-      }
+    caches.open(APP_SHELL_CACHE).then((cache) => {
+      return cache.addAll(APP_SHELL_URLS);
     })
   );
   self.skipWaiting();
 });
 
 self.addEventListener("activate", (event) => {
-  console.log("[SW] activate");
+  console.log("[SW] Activate");
   const keep = [APP_SHELL_CACHE, DATA_CACHE];
   event.waitUntil(
     caches.keys().then((keys) =>
       Promise.all(
-        keys.map((k) => {
-          if (!keep.includes(k)) {
-            console.log("[SW] Deleting cache:", k);
-            return caches.delete(k);
-          }
-          return null;
-        })
+        keys.map((k) => (!keep.includes(k) ? caches.delete(k) : null))
       )
     )
   );
@@ -49,69 +36,21 @@ async function networkFirst(request) {
   try {
     const response = await fetch(request);
     const cache = await caches.open(DATA_CACHE);
-    cache.put(request, response.clone()).catch(() => {});
+    cache.put(request, response.clone());
     return response;
   } catch (err) {
-    const cache = await caches.open(DATA_CACHE);
-    const cached = await cache.match(request);
-    if (cached) return cached;
-    return new Response(JSON.stringify({ error: "offline", message: "Resource unavailable and not cached." }), {
-      status: 503,
-      headers: { "Content-Type": "application/json" }
-    });
-  }
-}
-
-async function cacheFirstWithNetworkFallback(request) {
-  const cache = await caches.open(APP_SHELL_CACHE);
-  const cached = await cache.match(request);
-  if (cached) return cached;
-
-  try {
-    const response = await fetch(request);
-    if (request.method === "GET") {
-      cache.put(request, response.clone()).catch(() => {});
+    const cached = await caches.match(request);
+    if (cached) {
+      return cached;
     }
-    return response;
-  } catch (err) {
-    const fallback = await cache.match("/index.html");
-    return fallback || new Response("Offline", { status: 503 });
+    if (request.mode === "navigate") {
+      const appShell = await caches.match("/index.html");
+      return appShell || new Response("Offline", { status: 503 });
+    }
+    return new Response("Offline", { status: 503 });
   }
 }
 
 self.addEventListener("fetch", (event) => {
-  const { request } = event;
-  const url = new URL(request.url);
-
-  if (url.hostname.includes("rickandmortyapi.com")) {
-    event.respondWith(networkFirst(request));
-    return;
-  }
-
-  if (request.mode === "navigate") {
-    event.respondWith(
-      fetch(request)
-        .then((resp) => resp)
-        .catch(async () => {
-          const cache = await caches.open(APP_SHELL_CACHE);
-          const cachedIndex = await cache.match("/index.html");
-          return cachedIndex || new Response("Offline", { status: 503 });
-        })
-    );
-    return;
-  }
-
-  if (url.origin === self.location.origin) {
-    event.respondWith(cacheFirstWithNetworkFallback(request));
-    return;
-  }
-
-  event.respondWith(
-    fetch(request)
-      .then((resp) => resp)
-      .catch(async () => {
-        const cached = await caches.match(request);
-        return cached || new Response("Offline", { status: 503 });
-      })
-  );
+  event.respondWith(networkFirst(event.request));
 });
